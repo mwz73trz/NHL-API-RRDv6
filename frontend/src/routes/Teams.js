@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import nhlAPI from "../api/nhlAPI";
 
@@ -32,6 +32,7 @@ export default function Teams() {
           </Link>
         ))}
       </nav>
+      <Outlet />
     </div>
   );
 }
