@@ -10,16 +10,24 @@ render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="teams" element={<Teams />}>
+          <Route
+            index
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>Select a Team</p>
+              </main>
+            }
+          />
           <Route path=":teamId" element={<Team />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
         </Route>
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
       </Route>
     </Routes>
   </BrowserRouter>,

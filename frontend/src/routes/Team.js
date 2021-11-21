@@ -3,26 +3,40 @@ import { useState, useEffect } from "react";
 import nhlAPI from "../api/nhlAPI";
 
 export default function Team() {
-  const { teamId } = useParams();
+  let { teamId } = useParams();
   const [team, setTeam] = useState([]);
+  const [venue, setVenue] = useState([]);
+  const [conference, setConference] = useState([]);
+  const [division, setDivision] = useState([]);
 
-  async function getTeam() {
+  const getTeam = async () => {
     let teamData = await nhlAPI.getTeamById(parseInt(teamId));
-    console.log(teamData);
-    if (!teamData.error) {
+    let venueData = await nhlAPI.getTeamVenue(parseInt(teamId));
+    let conferenceData = await nhlAPI.getTeamConference(parseInt(teamId));
+    let divisionData = await nhlAPI.getTeamDivision(parseInt(teamId));
+    if (teamData && venueData && conferenceData && divisionData) {
       setTeam(teamData);
+      setVenue(venueData);
+      setConference(conferenceData);
+      setDivision(divisionData);
     }
-  }
-  useEffect(() => {
-    getTeam();
-    // eslint-disable-next-line
-  }, []);
+  };
+  useEffect(
+    () => {
+      getTeam();
+    },
+    [team],
+    [venue],
+    [conference]
+  );
 
   return (
     <main style={{ padding: "1rem" }}>
-      <h2>{team.name}</h2>
-      {/* <h3>Stadium/Venue: {team["venue"].name}</h3>
-      <h3>City: {team["venue"].city}</h3> */}
+      <h1>{team.name}</h1>
+      <h2>Stadium/Venue: {venue.name}</h2>
+      <h2>City: {venue.city}</h2>
+      <h2>Conference: {conference.name}</h2>
+      <h2>Division: {division.name}</h2>
     </main>
   );
 }

@@ -35,9 +35,26 @@ const getTeamById = async (teamId) => {
   return await tryCatchFetch(url, getInit());
 };
 
+const getTeamVenue = async (teamId) => {
+  let url = `${BASE_URL}api/teams/${teamId}/venue/`;
+  return await tryCatchFetch(url, getInit());
+};
+
+const getTeamConference = async (teamId) => {
+  let url = `${BASE_URL}api/teams/${teamId}/conference/`;
+  return await tryCatchFetch(url, getInit());
+};
+
+const getTeamDivision = async (teamId) => {
+  let url = `${BASE_URL}api/teams/${teamId}/division/`;
+  return await tryCatchFetch(url, getInit());
+};
 const myExports = {
   getTeams,
   getTeamById,
+  getTeamVenue,
+  getTeamConference,
+  getTeamDivision,
 };
 
 export default myExports;
